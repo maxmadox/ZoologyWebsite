@@ -94,7 +94,7 @@ $arrow_down = "&#9660;";
                     <td><?php echo $row['dob']; ?></td>
                     <td><?php echo $row['email']; ?></td>
                     <td><?php echo $row['phone_number']; ?></td>
-                    <td>
+                    <td class ="actions-cell">
                         <a href="edit_teacher.php?id=<?php echo $row['user_id']; ?>" class="edit">Edit</a>
                         <a href="delete_teacher.php?id=<?php echo $row['user_id']; ?>" class="delete">Delete</a>
                     </td>

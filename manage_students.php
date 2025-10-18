@@ -130,7 +130,7 @@ $arrow_down = "&#9660;";
                     <td><?php echo $row['roll_number']; ?></td>
                     <td><?php echo $row['email']; ?></td>
                     <td><?php echo $row['phone_number']; ?></td>
-                    <td>
+                    <td class="actions-cell">
                         <a href="edit_student.php?id=<?php echo $row['user_id']; ?>" class="edit">Edit</a>
                         <a href="delete_student.php?id=<?php echo $row['user_id']; ?>" class="delete">Delete</a>
                     </td>
