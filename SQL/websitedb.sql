@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 22, 2025 at 12:49 PM
+-- Generation Time: Oct 25, 2025 at 03:27 PM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -36,13 +36,23 @@ CREATE TABLE IF NOT EXISTS `attendance` (
   `status` enum('Present','Absent') NOT NULL DEFAULT 'Present',
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_attendance` (`student_id`,`teacher_id`,`date`)
-) ENGINE=MyISAM AUTO_INCREMENT=85 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=95 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `attendance`
 --
 
 INSERT INTO `attendance` (`id`, `student_id`, `teacher_id`, `date`, `status`) VALUES
+(94, 110, 14, '2025-10-25', 'Present'),
+(93, 109, 14, '2025-10-25', 'Present'),
+(92, 108, 14, '2025-10-25', 'Present'),
+(91, 107, 14, '2025-10-25', 'Present'),
+(90, 106, 14, '2025-10-25', 'Present'),
+(89, 105, 14, '2025-10-25', 'Present'),
+(88, 104, 14, '2025-10-25', 'Present'),
+(87, 103, 14, '2025-10-25', 'Present'),
+(86, 102, 14, '2025-10-25', 'Present'),
+(85, 101, 14, '2025-10-25', 'Present'),
 (84, 106, 14, '2025-10-21', 'Absent'),
 (83, 106, 14, '2025-10-22', 'Present');
 
