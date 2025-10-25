@@ -1,11 +1,11 @@
 <?php
 session_start();
-include 'database/database.php'; // Your database connection file
+include 'database/database.php'; 
 
-// Determine user type and id from session
+
 if(isset($_SESSION['role']) && $_SESSION['role'] === 'admin'){
     $user_type = 'admin';
-    $user_id = null; // Not needed for admin since only one exists
+    $user_id = null; 
 } elseif(isset($_SESSION['role']) && $_SESSION['role'] === 'teacher'){
     $user_type = 'teacher';
     if(!isset($_SESSION['user_id'])){
@@ -35,7 +35,7 @@ if(isset($_POST['update_password'])){
         exit;
     }
 
-    // Fetch current password
+   
     if($user_type === 'admin'){
         $stmt = $conn->prepare("SELECT password FROM users WHERE role = 'admin' LIMIT 1");
     } else {
@@ -48,16 +48,16 @@ if(isset($_POST['update_password'])){
     $stmt->fetch();
     $stmt->close();
 
-    // Verify current password
+    
     if(!password_verify($current_password, $db_password)){
         echo "<script>alert('Current password is incorrect'); window.history.back();</script>";
         exit;
     }
 
-    // Hash new password
+ 
     $new_password_hashed = password_hash($new_password, PASSWORD_DEFAULT);
 
-    // Update password in database
+   
     if($user_type === 'admin'){
         $stmt = $conn->prepare("UPDATE users SET password = ? WHERE role = 'admin' LIMIT 1");
         $stmt->bind_param("s", $new_password_hashed);
@@ -98,5 +98,4 @@ if(isset($_POST['update_password'])){
         <?php endif; ?>
 
     </main>
-
 

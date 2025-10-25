@@ -1,25 +1,28 @@
 <?php
 session_start();
-if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     header('Location: login.php');
     exit();
 }
 
 include 'database/database.php';
 
-if(isset($_GET['id'])) {
+if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    // Get roll_number of the student before deletion
-    $result = mysqli_query($conn, "SELECT roll_number FROM students WHERE user_id='$id'");
-    if($row = mysqli_fetch_assoc($result)) {
-        $roll_number = $row['roll_number'];
+    
+    $result = mysqli_query($conn, "SELECT snp_id FROM students WHERE user_id='$id'");
+    if ($row = mysqli_fetch_assoc($result)) {
+        $snp_id = $row['snp_id'];
 
-        // Delete student from students table
+        
+        mysqli_query($conn, "DELETE FROM attendance WHERE student_id='$id'");
+
+        
         mysqli_query($conn, "DELETE FROM students WHERE user_id='$id'");
 
-        // Delete corresponding login from users table
-        mysqli_query($conn, "DELETE FROM users WHERE username='$roll_number' AND role='student'");
+        
+        mysqli_query($conn, "DELETE FROM users WHERE username='$snp_id' AND role='student'");
     }
 }
 

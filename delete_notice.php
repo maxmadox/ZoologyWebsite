@@ -10,7 +10,7 @@ include 'database/database.php';
 if(isset($_GET['id'])){
     $id = intval($_GET['id']);
     
-    // Delete file from server
+   
     $res = mysqli_query($conn, "SELECT file_path FROM notices WHERE id=$id");
     if($row = mysqli_fetch_assoc($res)){
         if(file_exists($row['file_path'])){
@@ -18,7 +18,7 @@ if(isset($_GET['id'])){
         }
     }
 
-    // Delete database record
+    
     mysqli_query($conn, "DELETE FROM notices WHERE id=$id");
 }
 

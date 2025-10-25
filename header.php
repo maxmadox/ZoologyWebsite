@@ -3,7 +3,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Check if user is logged in
+
 $isLoggedIn = isset($_SESSION['role']);
 $username = $isLoggedIn ? $_SESSION['username'] : '';
 $role = $isLoggedIn ? $_SESSION['role'] : '';
@@ -23,33 +23,68 @@ $role = $isLoggedIn ? $_SESSION['role'] : '';
 <body>
 
 <header>
-    <h1>Zoology Department</h1>
+    <h1 class="header-heading">Zoology Department</h1>
 
-    <nav>
-        <a href="index.php">Home</a>
-        <a href="courses.php">Courses</a>
-        <a href="faculty.php">Faculty</a>
-        <a href="notice.php">Notice</a>
-        <a href="about.php">About</a>
-        <a href="contact.php">Contact</a>
-    </nav>
+    
+    <div class="pc-nav-container">
+        <nav class="pc-nav">
+            <a href="index.php">Home</a>
+            <a href="resources.php">Resources</a>
+            <a href="courses.php">Courses</a>
+            <a href="faculty.php">Faculty</a>
+            <a href="notice.php">Notice</a>
+            <a href="about.php">About</a>
+            <a href="contact.php">Contact</a>
+        </nav>
 
-    <?php if(!$isLoggedIn): ?>
-        <a href="login.php" class="login-button">Login</a>
-    <?php else: ?>
-        <?php
-            // Determine dashboard link based on role
-            $dashboardLink = 'student_dashboard.php'; // default
-            if($role === 'admin') {
-                $dashboardLink = 'admin_dashboard.php';
-            } elseif($role === 'teacher') {
-                $dashboardLink = 'teacher_dashboard.php';
-            }
-        ?>
-        <a href="<?php echo $dashboardLink; ?>" class="login-button admin-username">
-            <?php echo htmlspecialchars($username); ?>
-            <img src="content/usericon.svg" alt="user" class="usericon">
-        </a>
-    <?php endif; ?>
+        
+        <?php if(!$isLoggedIn): ?>
+            <a href="login.php" class="login-button">Login</a>
+        <?php else: ?>
+            <?php
+                $dashboardLink = 'student_dashboard.php';
+                if($role === 'admin') $dashboardLink = 'admin_dashboard.php';
+                elseif($role === 'teacher') $dashboardLink = 'teacher_dashboard.php';
+            ?>
+            <a href="<?php echo $dashboardLink; ?>" class="login-button admin-username">
+                <?php echo htmlspecialchars($username); ?>
+                <img src="content/usericon.svg" alt="user" class="usericon">
+            </a>
+        <?php endif; ?>
+    </div>
+
+    
+    <div class="mobile-nav-container">
+        <button class="hamburger">&#9776;</button>
+        <div class="mobile-nav">
+            <?php if(!$isLoggedIn): ?>
+                <a href="index.php">Home</a>
+                <a href="resources.php">Resources</a>
+                <a href="courses.php">Courses</a>
+                <a href="faculty.php">Faculty</a>
+                <a href="notice.php">Notice</a>
+                <a href="about.php">About</a>
+                <a href="contact.php">Contact</a>
+                <a href="login.php">Login</a>
+            <?php elseif($role === 'admin'): ?>   
+                            <a href="admin_dashboard.php">Dashboard</a>
+                            <a href="manage_students.php">Manage Students</a>
+                            <a href="manage_teachers.php">Manage Teachers</a>
+                            <a href="manage_notices.php">Manage Notices</a>
+                            <a href="manage_courses.php">Manage Courses</a>
+                            <a href="manage_contact.php">Manage Contact</a>
+                            <a href="admin_settings.php">Settings</a>
+                            <a href="logout.php">Logout</a>
+            <?php elseif($role === 'teacher'): ?>
+                            <li><a href="teacher_dashboard.php">Dashboard</a>
+                            <li><a href="manage_attendance.php">Manage Attendance</a>
+                            <li><a href="manage_resources.php">Manage Resources</a>
+                            <li><a href="teacher_settings.php">Settings</a>
+                            <li><a href="logout.php">Logout</a>
+            <?php elseif($role === 'student'): ?>
+                            
+            <?php endif; ?>
+        </div>
+    </div>
+
 </header>
-

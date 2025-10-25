@@ -9,14 +9,14 @@ include 'database/database.php';
 include 'header.php';
 ?>  
 
-<main class="admin-dashboard-container">
+<main class="add-student-view">
     <?php include 'admin_sidebar.php'; ?>
 
     <?php if(isset($_GET['error'])): ?>
         <?php if($_GET['error'] == 'duplicate'): ?>
             <div class="popup" style="display:flex;">
                 <div class="popup-content">
-                    <p>Student with this Roll Number already exists!</p>
+                    <p>Student with this SNP ID already exists!</p>
                     <button onclick="document.querySelector('.popup').style.display='none'">OK</button>
                 </div>
             </div>
@@ -30,12 +30,11 @@ include 'header.php';
         <?php endif; ?>
     <?php endif; ?>
 
-    <div class="admin-content">
-        <!-- Header: Title + Excel Upload -->
-        <div class="add-student-header">
-            <h1 class="admintitle">Add New Student</h1>
+    <div class="add-student-content">
+        <div class="add-student-row">
+            <h1 class="add-student-title">Add New Student</h1>
 
-            <!-- Upload Form -->
+            
             <form action="add_student_process.php" method="post" enctype="multipart/form-data">
                 <label class="upload-excel-btn">
                     <img src="content/excel.png" alt="Excel" class="excelicon">
@@ -46,7 +45,7 @@ include 'header.php';
             </form>
         </div>
 
-        <!-- Manual form -->
+        
         <form action="add_student_process.php" method="post" class="manual-form">
             <label>Full Name:</label>
             <input type="text" name="full_name" required>
@@ -54,9 +53,8 @@ include 'header.php';
             <label for="course">Course:</label>
             <select name="course" id="course" required>
                 <option value="">Select Course</option>
-                <option value="Zoology">Zoology</option>
-                <option value="Botany">Botany</option>
-                <option value="Biochemistry">Biochemistry</option>
+                <option value="B.sc">B.sc</option>
+                <option value="M.sc">M.sc</option>
             </select>
 
             <label for="semester">Semester:</label>
@@ -76,8 +74,8 @@ include 'header.php';
             <label>Year:</label>
             <input type="text" name="year">
 
-            <label>Roll Number:</label>
-            <input type="text" name="roll_number">
+            <label>SNP ID:</label>
+            <input type="text" name="snp_id">
 
             <label>Email:</label>
             <input type="email" name="email">

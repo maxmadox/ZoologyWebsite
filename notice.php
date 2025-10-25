@@ -2,13 +2,13 @@
 include 'database/database.php';
 include 'header.php';
 
-// Fetch notices
+
 $result = mysqli_query($conn, "SELECT * FROM notices ORDER BY date DESC");
 ?>
 
-<main class="admin-dashboard-container">
-    <div class="admin-content">
-        <h1 class="admintitle" style="text-align:center;">Notices</h1>
+<main class="notice-page-view">
+    <div class="notice-table-content">
+        <h1 class="notice-title">Notices</h1>
 
         <table>
             <thead>
@@ -24,8 +24,8 @@ $result = mysqli_query($conn, "SELECT * FROM notices ORDER BY date DESC");
                         <td><?php echo date('d-m-Y', strtotime($row['date'])); ?></td>
                         <td><?php echo htmlspecialchars($row['title']); ?></td>
                         <td class="actions-cell">
-                            <a href="uploads/<?php echo $row['file_path']; ?>" target="_blank" class="edit">View</a>
-                            <a href="uploads/<?php echo $row['file_path']; ?>" download class="edit">Download</a>
+                            <a href="<?php echo $row['file_path']; ?>" target="_blank" class="edit">View</a>
+                            <a href="<?php echo $row['file_path']; ?>" download class="edit">Download</a>
                         </td>
                     </tr>
                 <?php endwhile; ?>

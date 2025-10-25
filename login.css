@@ -1,3 +1,10 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #00A86B;
+    margin: 0;
+    padding: 0;
+}
+
 .loginview {
     max-width: 400px;
     padding: 30px;
@@ -14,13 +21,6 @@
     text-align: center;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #00A86B;
-    margin: 0;
-    padding: 0;
-}
-
 .loginview input[type="text"],
 .loginview input[type="password"] {
     width: 100%;
@@ -30,19 +30,14 @@ body {
     border: 1px solid #ccc;
     font-size: 16px;
     box-sizing: border-box;
-    
     outline: none;
-    transition: all 0.3s ease;
-    
+    transition: all 0.3s ease;    
 }
 
 .loginview input::placeholder {
     color: #888;
     font-style: italic;
 }
-
-
-
 
 .loginview input[type="submit"] {
     width: 100%;
@@ -54,17 +49,21 @@ body {
     color: white;
     font-size: 18px;
     font-weight: bold;
-    cursor: pointer;
-
-    
+    cursor: pointer;   
     box-shadow: none;
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-
     transition: background-color 0.3s ease;
 }
 
 .loginview input[type="submit"]:hover {
     background-color: #005C3A; 
+}
+
+@media (max-width: 768px) {
+    .loginview {
+        width: 60%
+    }
+    
 }

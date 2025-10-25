@@ -1,31 +1,30 @@
 <?php
 session_start();
 
-// Check if user is logged in and role is set
+
 if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     header('Location: login.php');
     exit();
 }
 
-// Include database connection
+
 include 'database/database.php';
 
-// Initialize status variable for modal
 $status = '';
 
-// Handle password update if form submitted
+
 if(isset($_POST['update_password'])){
     $current_password = $_POST['current_password'];
     $new_password = $_POST['new_password'];
     $confirm_password = $_POST['confirm_password'];
 
-    $user_type = $_SESSION['role']; // 'admin'
-    $user_id = $_SESSION['user_id'] ?? null; // not needed for admin
+    $user_type = $_SESSION['role']; 
+    $user_id = $_SESSION['user_id'] ?? null; 
 
     if($new_password !== $confirm_password){
         $status = 'mismatch';
     } else {
-        // Fetch current password
+       
         if($user_type === 'admin'){
             $stmt = $conn->prepare("SELECT password FROM users WHERE role='admin' LIMIT 1");
         } else {
@@ -38,7 +37,7 @@ if(isset($_POST['update_password'])){
         $stmt->fetch();
         $stmt->close();
 
-        // Verify current password
+        
         if(!password_verify($current_password, $db_password)){
             $status = 'wrong';
         } else {
@@ -62,13 +61,13 @@ if(isset($_POST['update_password'])){
 include 'header.php';
 ?>
 
-<main class ="admin-dashboard-container">
+<main class ="admin-setting-view">
     <?php include 'admin_sidebar.php'; ?>
 
-    <div class="dashboard-settings">
-        <h2 class="admintitle">Settings</h2>
+    <div class="admin-setting-content">
+        <h2 class="admin-setting-title">Settings</h2>
 
-        <div class="setting-card">
+        <div class="admin-setting-card">
             <h3>Update Password</h3>
             <form action="" method="post">
                 <label for="current-password">Current Password</label>
@@ -85,7 +84,7 @@ include 'header.php';
         </div>
     </div>
 
-    <!-- Modal Popup -->
+    
     <?php if($status != ''): ?>
     <div id="passwordModal" class="modal">
         <div class="modal-content">

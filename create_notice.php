@@ -10,40 +10,46 @@ include 'header.php';
 
 $error = '';
 
-// Handle form submission
+
 if(isset($_POST['add_notice'])){
     $title = mysqli_real_escape_string($conn, $_POST['title']);
 
     if(isset($_FILES['file']) && $_FILES['file']['error'] == 0){
-        $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
-        $allowed = ['pdf','jpg','jpeg','png'];
+        $file_tmp = $_FILES['file']['tmp_name'];
+        $file_name = basename($_FILES['file']['name']);
+        $file_type = mime_content_type($file_tmp);
+        $ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
 
-        if(in_array(strtolower($ext), $allowed)){
+        
+        $allowed_mimes = ['application/pdf', 'image/jpeg', 'image/png'];
+        $allowed_exts = ['pdf', 'jpg', 'jpeg', 'png'];
+
+        if(in_array($file_type, $allowed_mimes) && in_array($ext, $allowed_exts)){
             $folder = 'uploads/notices/';
             if(!is_dir($folder)) mkdir($folder, 0777, true);
 
-            $filename = time().'_'.basename($_FILES['file']['name']);
+            $filename = time().'_'.$file_name;
             $filepath = $folder.$filename;
 
-            if(move_uploaded_file($_FILES['file']['tmp_name'], $filepath)){
-                mysqli_query($conn, "INSERT INTO notices (title, file_path, date) VALUES ('$title','$filepath',NOW())");
-
-                // Redirect to manage notices after adding
+            if(move_uploaded_file($file_tmp, $filepath)){
+                mysqli_query($conn, "INSERT INTO notices (title, file_path, date) VALUES ('$title', '$filepath', NOW())");
                 header('Location: manage_notices.php');
                 exit();
             } else {
-                $error = "Failed to upload the file.";
+                $error = "Failed to upload file. Check folder permissions.";
             }
         } else {
-            $error = "Invalid file type! Only PDF, JPG, JPEG, PNG are allowed.";
+            $error = "Invalid file type. Only PDF, JPG, and PNG files are allowed.";
         }
     } else {
-        $error = "Please upload a file!";
+        $error = "Please upload a file.";
     }
 }
+
+
 ?>
 
-<main class="admin-dashboard-container">
+<main class="create-notice-view">
     <?php include 'admin_sidebar.php'; ?>
 
     <?php if($error): ?>
@@ -55,10 +61,10 @@ if(isset($_POST['add_notice'])){
         </div>
     <?php endif; ?>
 
-    <div class="admin-content">
-        <div class="add-student-header">
-            <h1 class="admintitle">Add New Notice</h1>
-        </div>
+    <div class="create-notice-content">
+        
+            <h1 class="create-notice-title">Add New Notice</h1>
+        
 
         <form action="" method="post" enctype="multipart/form-data" class="manual-form">
             <label>Notice Title:</label>

@@ -1,7 +1,8 @@
 <?php include 'header.php'; ?>
 
-<main class="aboutvisual">
-    <section class="aboutinfo">
+<main>
+    <section class="about-view">
+        <div class="about-text">
         <h1>Department of Zoology</h1>
         <p>
             The Department of Zoology at Kirodimal Govt. Arts & Science College has been shaping curious minds since 1958. 
@@ -10,7 +11,14 @@
         <p>
             Our vision is to inspire students to understand and protect the natural world, while gaining practical knowledge in zoological sciences.
         </p>
+
+        </div>
+
+            <div class="about-image">
+                <img src="content/gecko.jpg" alt="gecko">
+            </div>
     </section>
+     <?php include 'footer1.php'; ?>
+    
 </main>
 
-<?php include 'footer.php'; ?>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Check if admin
+
 if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     header('Location: login.php');
     exit();
@@ -10,28 +10,28 @@ if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
 include 'database/database.php';
 include 'header.php';
 
-// --- Sorting & filtering ---
+
 $sort_by = isset($_GET['sort']) ? $_GET['sort'] : 'user_id';
 $order = isset($_GET['order']) ? $_GET['order'] : 'ASC';
 
-// Only allow valid columns to prevent SQL injection
+
 $valid_columns = ['user_id', 'full_name', 'semester'];
 if(!in_array($sort_by, $valid_columns)) {
     $sort_by = 'user_id';
 }
 $order = strtoupper($order) === 'DESC' ? 'DESC' : 'ASC';
 
-// Filters
+
 $filter_semester = isset($_GET['filter_semester']) ? $_GET['filter_semester'] : '';
 $filter_course = isset($_GET['filter_course']) ? $_GET['filter_course'] : '';
 $filter_year = isset($_GET['filter_year']) ? $_GET['filter_year'] : '';
 
-// Pagination
+
 $limit = 10;
 $page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
 $offset = ($page - 1) * $limit;
 
-// Build WHERE clause for filters
+
 $where = [];
 if($filter_semester) $where[] = "semester='$filter_semester'";
 if($filter_course) $where[] = "course='$filter_course'";
@@ -39,49 +39,48 @@ if($filter_year) $where[] = "year='$filter_year'";
 
 $search = isset($_GET['search']) ? mysqli_real_escape_string($conn, $_GET['search']) : '';
 if($search) {
-    $where[] = "(full_name LIKE '%$search%' OR roll_number LIKE '%$search%')";
+    $where[] = "(full_name LIKE '%$search%' OR snp_id LIKE '%$search%')";
 }
 
 $where_sql = $where ? "WHERE " . implode(" AND ", $where) : "";
 
-// Total rows for pagination
+
 $total_result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM students $where_sql");
 $total_row = mysqli_fetch_assoc($total_result);
 $total_pages = ceil($total_row['total'] / $limit);
 
-// Fetch students
+
 $query = "SELECT * FROM students $where_sql ORDER BY $sort_by $order LIMIT $limit OFFSET $offset";
 $result = mysqli_query($conn, $query);
 
-// Arrow icons
+
 $arrow_up = "&#9650;";
 $arrow_down = "&#9660;";
 ?>
 
-<main class="admin-dashboard-container">
+<main class="manage-students">
     <?php include 'admin_sidebar.php'; ?>
 
-    <div class="admin-content">
-        <div class="title-row">
-            <h1 class="admintitle">Manage Students</h1>
+    <div class="manage-students-content">
+        <div class="manage-students-row">
+            <h1 class="manage-students-title">Manage Students</h1>
 
             <form method="GET" class="filters-form">
 
-                <!-- Delete All Button -->
-                <a href="delete_all.php?filter_semester=<?php echo $filter_semester ?>&filter_course=<?php echo $filter_course ?>&filter_year=<?php echo $filter_year ?>&search=<?php echo urlencode($search); ?>" class="delete">Delete All</a>
+                
+                <a href="delete_all.php?filter_semester=<?php echo $filter_semester ?>&filter_course=<?php echo $filter_course ?>&filter_year=<?php echo $filter_year ?>&search=<?php echo urlencode($search); ?>" class="delete-all">Delete All</a>
 
-                <select name="filter_semester" class="filter-select">
+                <select name="filter_semester" class="filter-select custom-arrow">
                     <option value="">All Semesters</option>
                     <?php for($i=1;$i<=6;$i++): ?>
                         <option value="<?php echo $i ?>" <?php if($filter_semester==$i) echo "selected"; ?>>Semester <?php echo $i ?></option>
                     <?php endfor; ?>
                 </select>
 
-                <select name="filter_course" class="filter-select">
+                <select name="filter_course" class="filter-select custom-arrow">
                     <option value="">All Courses</option>
-                    <option value="Zoology" <?php if($filter_course=='Zoology') echo "selected"; ?>>Zoology</option>
-                    <option value="Botany" <?php if($filter_course=='Botany') echo "selected"; ?>>Botany</option>
-                    <option value="Biochemistry" <?php if($filter_course=='Biochemistry') echo "selected"; ?>>Biochemistry</option>
+                    <option value="B.sc" <?php if($filter_course=='B.sc') echo "selected"; ?>>B.sc</option>
+                    <option value="M.sc" <?php if($filter_course=='M.sc') echo "selected"; ?>>M.sc</option>
                 </select>
 
                 <input type="text" name="search" placeholder="Search by Name or Roll" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>" class="filter-input">
@@ -94,7 +93,7 @@ $arrow_down = "&#9660;";
             <a href="add_student.php" class="add-button">Add New Student</a>
         </div>
 
-        <!-- Student Table -->
+        
         <table>
             <thead>
                 <tr>
@@ -105,7 +104,7 @@ $arrow_down = "&#9660;";
                         'course'=>'Course',
                         'semester'=>'Semester',
                         'year'=>'Year',
-                        'roll_number'=>'Roll Number',
+                        'snp_id'=>'SNP ID',
                         'email'=>'Email',
                         'phone_number'=>'Phone'
                     ];
@@ -127,7 +126,7 @@ $arrow_down = "&#9660;";
                     <td><?php echo $row['course']; ?></td>
                     <td><?php echo $row['semester']; ?></td>
                     <td><?php echo $row['year']; ?></td>
-                    <td><?php echo $row['roll_number']; ?></td>
+                    <td><?php echo $row['snp_id']; ?></td>
                     <td><?php echo $row['email']; ?></td>
                     <td><?php echo $row['phone_number']; ?></td>
                     <td class="actions-cell">
@@ -139,7 +138,7 @@ $arrow_down = "&#9660;";
             </tbody>
         </table>
 
-        <!-- Pagination -->
+        
         <div class="pagination">
             <?php if($page>1): ?>
                 <a href="?page=<?php echo $page-1 ?>&sort=<?php echo $sort_by ?>&order=<?php echo $order ?>&filter_semester=<?php echo $filter_semester ?>&filter_course=<?php echo $filter_course ?>&filter_year=<?php echo $filter_year ?>" class="page-link">Prev</a>
@@ -155,7 +154,7 @@ $arrow_down = "&#9660;";
         </div>
     </div>
 
-    <!-- Delete Modal -->
+    
     <div id="deleteModal" class="modal">
         <div class="modal-content">
             <p>Are you sure you want to delete this student?</p>
@@ -175,10 +174,10 @@ const modal = document.getElementById('deleteModal');
 const confirmBtn = document.getElementById('confirmDelete');
 const cancelBtn = document.getElementById('cancelDelete');
 
-// Single delete
+
 document.querySelectorAll('a.delete').forEach(link => {
     link.addEventListener('click', function(e) {
-        if(this.classList.contains('delete-all')) return; // skip Delete All link
+        if(this.classList.contains('delete-all')) return; 
         e.preventDefault();
         studentIdToDelete = this.getAttribute('href');
         modal.querySelector('p').textContent = 'Are you sure you want to delete this student?';
@@ -186,7 +185,7 @@ document.querySelectorAll('a.delete').forEach(link => {
     });
 });
 
-// Delete All
+
 const deleteAllBtn = document.querySelector('a.delete-all');
 if(deleteAllBtn){
     deleteAllBtn.addEventListener('click', function(e) {
@@ -197,7 +196,7 @@ if(deleteAllBtn){
     });
 }
 
-// Confirm button
+
 confirmBtn.addEventListener('click', function() {
     if(studentIdToDelete) {
         window.location.href = studentIdToDelete;
@@ -206,14 +205,14 @@ confirmBtn.addEventListener('click', function() {
     }
 });
 
-// Cancel button
+
 cancelBtn.addEventListener('click', function() {
     modal.style.display = 'none';
     studentIdToDelete = null;
     deleteAllUrl = null;
 });
 
-// Close modal on outside click
+
 window.addEventListener('click', function(e) {
     if(e.target == modal){
         modal.style.display = 'none';

@@ -9,52 +9,52 @@ if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
 include 'database/database.php';
 include 'header.php';
 
-// --- Sorting & search ---
+
 $sort_by = isset($_GET['sort']) ? $_GET['sort'] : 'full_name';
 $order = isset($_GET['order']) ? $_GET['order'] : 'ASC';
 
-// Only allow valid columns
-$valid_columns = ['user_id', 'full_name', 'dob', 'email', 'phone_number'];
+
+$valid_columns = ['user_id', 'full_name', 'dob', 'email', 'phone_number', 'qualification', 'date_joined', 'teaching_years', 'image_path'];
 if(!in_array($sort_by, $valid_columns)) $sort_by = 'full_name';
 $order = strtoupper($order) === 'DESC' ? 'DESC' : 'ASC';
 
-// Search
+
 $search = isset($_GET['search']) ? mysqli_real_escape_string($conn, $_GET['search']) : '';
 
-// Pagination
+
 $limit = 10;
 $page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
 $offset = ($page - 1) * $limit;
 
-// Build WHERE clause
+
 $where = [];
 if($search) {
     $where[] = "(full_name LIKE '%$search%' OR user_id LIKE '%$search%')";
 }
 $where_sql = $where ? "WHERE " . implode(" AND ", $where) : "";
 
-// Total rows for pagination
+
 $total_result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM teachers $where_sql");
 $total_row = mysqli_fetch_assoc($total_result);
 $total_pages = ceil($total_row['total'] / $limit);
 
-// Fetch teachers
-$query = "SELECT * FROM teachers $where_sql ORDER BY $sort_by $order LIMIT $limit OFFSET $offset";
+
+$query = "SELECT *, TIMESTAMPDIFF(YEAR, date_joined, CURDATE()) AS teaching_years FROM teachers $where_sql ORDER BY $sort_by $order LIMIT $limit OFFSET $offset";
 $result = mysqli_query($conn, $query);
 
-// Arrow icons
+
 $arrow_up = "&#9650;";
 $arrow_down = "&#9660;";
 ?>
 
-<main class="admin-dashboard-container">
+<main class="manage-teachers">
     <?php include 'admin_sidebar.php'; ?>
 
-    <div class="admin-content">
-        <div class="title-row">
-            <h1 class="admintitle">Manage Teachers</h1>
+    <div class="manage-teachers-content">
+        <div class="manage-teachers-row">
+            <h1 class="manage-teachers-title">Manage Teachers</h1>
 
-            <!-- Search box -->
+            
             <form method="GET" class="filters-form">
                 <input type="text" name="search" placeholder="Search by Name or ID" value="<?php echo htmlspecialchars($search); ?>" class="filter-input">
                 
@@ -64,17 +64,22 @@ $arrow_down = "&#9660;";
             <a href="add_teacher.php" class="add-button">Add New Teacher</a>
         </div>
 
-        <!-- Teacher Table -->
+        
         <table>
             <thead>
                 <tr>
                     <?php
+                   
                     $columns = [
                         'user_id'=>'ID',
                         'full_name'=>'Name',
                         'dob'=>'DOB',
                         'email'=>'Email',
-                        'phone_number'=>'Phone'
+                        'phone_number'=>'Phone',
+                        'qualification'=>'Qualification',
+                        'teaching_years'=>'Experience',
+                        'date_joined'=>'Joined On',
+                        'image_path'=>'Image'
                     ];
                     foreach($columns as $col=>$label):
                         $new_order = ($sort_by==$col && $order=='ASC') ? 'DESC' : 'ASC';
@@ -94,6 +99,10 @@ $arrow_down = "&#9660;";
                     <td><?php echo $row['dob']; ?></td>
                     <td><?php echo $row['email']; ?></td>
                     <td><?php echo $row['phone_number']; ?></td>
+                    <td><?php echo $row['qualification']; ?></td>
+                    <td><?php echo $row['teaching_years']; ?></td>
+                    <td><?php echo $row['date_joined']; ?></td>
+                    <td><?php echo !empty($row['image_path']) ? 'Uploaded' : 'Not Uploaded'; ?></td>
                     <td class ="actions-cell">
                         <a href="edit_teacher.php?id=<?php echo $row['user_id']; ?>" class="edit">Edit</a>
                         <a href="delete_teacher.php?id=<?php echo $row['user_id']; ?>" class="delete">Delete</a>
@@ -103,7 +112,7 @@ $arrow_down = "&#9660;";
             </tbody>
         </table>
 
-        <!-- Pagination -->
+        
         <div class="pagination">
             <?php if($page>1): ?>
                 <a href="?page=<?php echo $page-1 ?>&sort=<?php echo $sort_by ?>&order=<?php echo $order ?>&search=<?php echo urlencode($search); ?>" class="page-link">Prev</a>
@@ -119,7 +128,7 @@ $arrow_down = "&#9660;";
         </div>
     </div>
 
-    <!-- Delete Modal -->
+    
     <div id="deleteModal" class="modal">
         <div class="modal-content">
             <p>Are you sure you want to delete this teacher?</p>

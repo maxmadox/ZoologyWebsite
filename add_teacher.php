@@ -9,15 +9,15 @@ include 'database/database.php';
 include 'header.php';
 ?>  
 
-<main class="admin-dashboard-container">
+<main class="add-teacher-view">
     <?php include 'admin_sidebar.php'; ?>
 
-    <div class="admin-content">
-        <div class="add-student-header">
-            <h1 class="admintitle">Add New Teacher</h1>
+    <div class="add-teacher-content">
+        <div class="add-teacher-row">
+            <h1 class="add-teacher-title">Add New Teacher</h1>
 
-            <!-- Excel/CSV Upload button -->
-            <form action="add_teacher_process.php" method="post" enctype="multipart/form-data" style="display:flex; align-items:center;">
+           
+            <form action="add_teacher_process.php" method="post" enctype="multipart/form-data" class="excel-upload-form">
                 <label class="upload-excel-btn">
                     <img src="content/excel.png" alt="Excel" class="excelicon">
                     Excel/CSV
@@ -27,17 +27,17 @@ include 'header.php';
             </form>
         </div>
 
-        <!-- Popup for duplicate or invalid file -->
+       
         <?php if(isset($_GET['error'])): ?>
             <?php if($_GET['error'] == 'duplicate'): ?>
-                <div class="popup" style="display:flex;">
+                <div class="popup">
                     <div class="popup-content">
                         <p>Teacher with this Email already exists!</p>
                         <button onclick="document.querySelector('.popup').style.display='none'">OK</button>
                     </div>
                 </div>
             <?php elseif($_GET['error'] == 'invalidfile'): ?>
-                <div class="popup" style="display:flex;">
+                <div class="popup">
                     <div class="popup-content">
                         <p>Invalid file type! Only CSV is allowed.</p>
                         <button onclick="document.querySelector('.popup').style.display='none'">OK</button>
@@ -46,8 +46,8 @@ include 'header.php';
             <?php endif; ?>
         <?php endif; ?>
 
-        <!-- Manual entry form -->
-        <form action="add_teacher_process.php" method="post" class="manual-form">
+       
+        <form action="add_teacher_process.php" method="post" class="manual-form" enctype="multipart/form-data">
             <label>Full Name:</label>
             <input type="text" name="full_name" required>
 
@@ -60,8 +60,40 @@ include 'header.php';
             <label>Phone:</label>
             <input type="text" name="phone_number" required>
 
+            
+            <label>Qualification:</label>
+            <div class="qualification-options">
+                <label class="qualification-label"><input type="checkbox" name="qualification[]" value="B.Sc"> B.Sc</label>
+                <label class="qualification-label"><input type="checkbox" name="qualification[]" value="M.Sc"> M.Sc</label>
+                <label class="qualification-label"><input type="checkbox" name="qualification[]" value="Ph.D"> Ph.D</label>
+
+                
+                <label class="qualification-label">
+                    <input type="checkbox" id="otherCheck" name="qualification[]" value="Other"> Other
+                </label>
+                <input type="text" id="otherInput" name="other_qualification" placeholder="Specify other qualification" class="other-input">
+            </div>
+
+            <label>Date Joined:</label>
+            <input type="date" name="date_joined" required>
+
+            <label>Profile Image:</label>
+            <input type="file" name="teacher_image" accept="image/*">
+
             <input type="submit" name="add_teacher" value="Add Teacher">
         </form>
+
+        <script>
+            
+            const otherCheck = document.getElementById('otherCheck');
+            const otherInput = document.getElementById('otherInput');
+            otherInput.style.display = 'none'; 
+
+            otherCheck.addEventListener('change', function() {
+                otherInput.style.display = this.checked ? 'block' : 'none';
+            });
+        </script>
+
     </div>
 </main>
 

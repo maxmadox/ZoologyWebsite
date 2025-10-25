@@ -7,34 +7,34 @@ if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
 
 include 'database/database.php';
 
-// Get filters
+
 $filter_semester = isset($_GET['filter_semester']) ? $_GET['filter_semester'] : '';
 $filter_course = isset($_GET['filter_course']) ? $_GET['filter_course'] : '';
 $filter_year = isset($_GET['filter_year']) ? $_GET['filter_year'] : '';
 $search = isset($_GET['search']) ? mysqli_real_escape_string($conn, $_GET['search']) : '';
 
-// Build WHERE clause
+
 $where = [];
 if($filter_semester) $where[] = "semester='$filter_semester'";
 if($filter_course) $where[] = "course='$filter_course'";
 if($filter_year) $where[] = "year='$filter_year'";
-if($search) $where[] = "(full_name LIKE '%$search%' OR roll_number LIKE '%$search%')";
+if($search) $where[] = "(full_name LIKE '%$search%' OR snp_id LIKE '%$search%')";
 $where_sql = $where ? "WHERE " . implode(" AND ", $where) : "";
 
-// Get all roll_numbers of filtered students
-$result = mysqli_query($conn, "SELECT roll_number FROM students $where_sql");
-$roll_numbers = [];
+
+$result = mysqli_query($conn, "SELECT snp_id FROM students $where_sql");
+$snp_ids = [];
 while($row = mysqli_fetch_assoc($result)) {
-    $roll_numbers[] = "'" . $row['roll_number'] . "'";
+    $snp_ids[] = "'" . $row['snp_id'] . "'";
 }
 
-// Delete corresponding logins in users table
-if(!empty($roll_numbers)) {
-    $roll_list = implode(',', $roll_numbers);
+
+if(!empty($snp_ids)) {
+    $roll_list = implode(',', $snp_ids);
     mysqli_query($conn, "DELETE FROM users WHERE username IN ($roll_list) AND role='student'");
 }
 
-// Delete students from students table
+
 mysqli_query($conn, "DELETE FROM students $where_sql");
 
 header('Location: manage_students.php');

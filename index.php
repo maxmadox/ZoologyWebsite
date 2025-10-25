@@ -2,7 +2,7 @@
 
     <main>
         <section class="home-intro">
-
+            
             <div class="intro-text">
 
             <h1>Department of Zoology</h1>
@@ -11,11 +11,11 @@
             </div>
 
             <div class="intro-image">
-                <img src="content/Frog.jpg" alt="Frog">
+                <img src="content/gecko.jpg" alt="gecko">
             </div>
 
         </section>
 
     </main>
 
-<?php include 'footer.php'; ?>
+<?php include 'footer1.php'; ?>

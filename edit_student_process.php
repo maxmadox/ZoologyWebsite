@@ -14,7 +14,7 @@ if(isset($_POST['update_student'])) {
     $semester = $_POST['semester'];
     $dob = $_POST['dob'];
     $year = $_POST['year'];
-    $roll_number = $_POST['roll_number'];
+    $snp_id = $_POST['snp_id'];
     $email = $_POST['email'];
     $phone = $_POST['phone_number'];
 
@@ -24,7 +24,7 @@ if(isset($_POST['update_student'])) {
                 semester='$semester',
                 dob='$dob',
                 year='$year',
-                roll_number='$roll_number',
+                snp_id='$snp_id',
                 email='$email',
                 phone_number='$phone'
               WHERE user_id='$id'";

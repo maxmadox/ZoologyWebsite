@@ -3,27 +3,27 @@ session_start();
 include 'database/database.php';
 include 'header.php';
 
-// Check if admin
+
 $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
 
-// Sorting
+
 $sort_by = isset($_GET['sort']) ? $_GET['sort'] : 'date';
 $order = isset($_GET['order']) ? $_GET['order'] : 'DESC';
 $valid_columns = ['date', 'title'];
 if (!in_array($sort_by, $valid_columns)) $sort_by = 'date';
 $order = strtoupper($order) === 'ASC' ? 'ASC' : 'DESC';
 
-// Pagination
+
 $limit = 10;
 $page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
 $offset = ($page - 1) * $limit;
 
-// Total rows
+
 $total_result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM notices");
 $total_row = mysqli_fetch_assoc($total_result);
 $total_pages = ceil($total_row['total'] / $limit);
 
-// Fetch notices
+
 $query = "SELECT * FROM notices ORDER BY $sort_by $order LIMIT $limit OFFSET $offset";
 $result = mysqli_query($conn, $query);
 
@@ -31,12 +31,12 @@ $arrow_up = "&#9650;";
 $arrow_down = "&#9660;";
 ?>
 
-<main class="admin-dashboard-container">
+<main class="manage-notice-view">
     <?php if($is_admin) include 'admin_sidebar.php'; ?>
 
-    <div class="<?php echo $is_admin ? 'admin-content' : 'public-content'; ?>">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-            <h1 class="admintitle">Manage Notices</h1>
+    <div class="<?php echo $is_admin ? 'manage-notice-content' : 'public-content'; ?>">
+        <div class="manage-notice-row">
+            <h1 class="manage-notice-title">Manage Notices</h1>
             <?php if($is_admin): ?>
                 <a href="create_notice.php" class="add-button">Create Notice</a>
             <?php endif; ?>
@@ -90,5 +90,48 @@ $arrow_down = "&#9660;";
         </div>
     </div>
 </main>
+
+
+<div id="deleteModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to delete this notice?</p>
+        <div class="modal-buttons">
+            <button id="confirmDelete">Yes, Delete</button>
+            <button id="cancelDelete">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<script>
+let deleteUrl = null;
+const modal = document.getElementById('deleteModal');
+
+document.querySelectorAll('a.delete').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        deleteUrl = this.href;
+        modal.style.display = 'flex';
+    });
+});
+
+
+document.getElementById('confirmDelete').addEventListener('click', function() {
+    if(deleteUrl) window.location.href = deleteUrl;
+});
+
+
+document.getElementById('cancelDelete').addEventListener('click', function() {
+    modal.style.display = 'none';
+    deleteUrl = null;
+});
+
+
+window.addEventListener('click', function(e) {
+    if(e.target === modal){
+        modal.style.display = 'none';
+        deleteUrl = null;
+    }
+});
+</script>
 
 <?php include 'footer.php'; ?>
