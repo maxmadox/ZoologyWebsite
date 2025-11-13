@@ -8,7 +8,7 @@ $result = mysqli_query($conn, "SELECT * FROM teachers ORDER BY full_name ASC");
 ?>
 
 <main class="faculty-container">
-    <h1 class="faculty-title">Our Faculty</h1>
+    <h1 class="faculty-title">Faculty</h1>
 
     <div class="faculty-list">
         <?php
