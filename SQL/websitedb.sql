@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 25, 2025 at 03:27 PM
+-- Generation Time: Nov 13, 2025 at 05:36 AM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -36,13 +36,53 @@ CREATE TABLE IF NOT EXISTS `attendance` (
   `status` enum('Present','Absent') NOT NULL DEFAULT 'Present',
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_attendance` (`student_id`,`teacher_id`,`date`)
-) ENGINE=MyISAM AUTO_INCREMENT=95 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=135 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `attendance`
 --
 
 INSERT INTO `attendance` (`id`, `student_id`, `teacher_id`, `date`, `status`) VALUES
+(134, 140, 86, '2025-10-26', 'Present'),
+(133, 139, 86, '2025-10-26', 'Present'),
+(132, 138, 86, '2025-10-26', 'Present'),
+(131, 137, 86, '2025-10-26', 'Present'),
+(130, 136, 86, '2025-10-26', 'Present'),
+(129, 135, 86, '2025-10-26', 'Present'),
+(128, 134, 86, '2025-10-26', 'Present'),
+(127, 133, 86, '2025-10-26', 'Present'),
+(126, 132, 86, '2025-10-26', 'Present'),
+(125, 131, 86, '2025-10-26', 'Present'),
+(124, 130, 86, '2025-10-26', 'Present'),
+(123, 129, 86, '2025-10-26', 'Present'),
+(122, 128, 86, '2025-10-26', 'Present'),
+(121, 127, 86, '2025-10-26', 'Present'),
+(120, 126, 86, '2025-10-26', 'Present'),
+(119, 125, 86, '2025-10-26', 'Present'),
+(118, 124, 86, '2025-10-26', 'Present'),
+(117, 123, 86, '2025-10-26', 'Present'),
+(116, 122, 86, '2025-10-26', 'Present'),
+(115, 121, 86, '2025-10-26', 'Present'),
+(114, 120, 86, '2025-10-26', 'Present'),
+(113, 119, 86, '2025-10-26', 'Present'),
+(112, 118, 86, '2025-10-26', 'Present'),
+(111, 117, 86, '2025-10-26', 'Present'),
+(110, 116, 86, '2025-10-26', 'Present'),
+(109, 115, 86, '2025-10-26', 'Present'),
+(108, 114, 86, '2025-10-26', 'Present'),
+(107, 113, 86, '2025-10-26', 'Present'),
+(106, 112, 86, '2025-10-26', 'Present'),
+(105, 111, 86, '2025-10-26', 'Present'),
+(104, 110, 86, '2025-10-26', 'Present'),
+(103, 109, 86, '2025-10-26', 'Present'),
+(102, 108, 86, '2025-10-26', 'Present'),
+(101, 107, 86, '2025-10-26', 'Present'),
+(100, 106, 86, '2025-10-26', 'Present'),
+(99, 105, 86, '2025-10-26', 'Present'),
+(98, 104, 86, '2025-10-26', 'Present'),
+(97, 103, 86, '2025-10-26', 'Present'),
+(96, 102, 86, '2025-10-26', 'Present'),
+(95, 101, 86, '2025-10-26', 'Present'),
 (94, 110, 14, '2025-10-25', 'Present'),
 (93, 109, 14, '2025-10-25', 'Present'),
 (92, 108, 14, '2025-10-25', 'Present'),
@@ -99,6 +139,21 @@ CREATE TABLE IF NOT EXISTS `contact_info` (
 
 INSERT INTO `contact_info` (`id`, `email`, `phone`) VALUES
 (1, 'hod@college.edu', '(123) 456-7890');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `gallery`
+--
+
+DROP TABLE IF EXISTS `gallery`;
+CREATE TABLE IF NOT EXISTS `gallery` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `image_path` varchar(255) NOT NULL,
+  `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -161,14 +216,6 @@ CREATE TABLE IF NOT EXISTS `notices` (
   `date` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `notices`
---
-
-INSERT INTO `notices` (`id`, `title`, `file_path`, `date`) VALUES
-(7, 'j', 'uploads/notices/1760866973_croco.jpg', '2025-10-19 15:12:53'),
-(8, 'you you you you you', 'uploads/notices/1761046240_croco.jpg', '2025-10-21 17:00:40');
 
 -- --------------------------------------------------------
 
@@ -304,16 +351,6 @@ CREATE TABLE IF NOT EXISTS `teachers` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Dumping data for table `teachers`
---
-
-INSERT INTO `teachers` (`user_id`, `full_name`, `dob`, `email`, `phone_number`, `qualification`, `date_joined`, `image_path`) VALUES
-(11, 'Batman', '1970-02-19', 'Batman@gmail.com', '8888888888', 'Ph.D', '1939-03-13', 'uploads/teachers/teacher_68f45348e716b.jpg'),
-(12, 'BlackCat', '2000-01-01', 'blackcat@gmail.com', '6999999999', 'Ph.D', '2005-01-01', 'uploads/teachers/teacher_68f453b5e0cc2.png'),
-(13, 'Spiderman', '1962-08-10', 'Peterparker@gmail.com', '0000000000', 'Ph.D', '1962-08-10', 'uploads/teachers/teacher_68f46514756e2.jpg'),
-(14, 'kkkkk', '2000-11-11', '1@gmail.com', '1', 'Ph.D, gg', '1111-11-11', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -337,7 +374,6 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`, `status`) VALUES
 (1, 'admin', '$2y$10$Cpx7O/Lkg53jluLKu5b8BOsyUwRsdhCRBRwueEgMasnneKa4MjG.a', 'admin', 'active'),
-(85, 'blackcat@gmail.com', '$2y$10$XM953iuVvsGtP7fPG5D6VO0/YoDgfTsBdjsVYoejG5.FwYTFswULa', 'teacher', 'active'),
 (122, 'SNP1023', '$2y$10$WyvSHm1sew.n84fFBLVLKOQZwSdbQddpnzmI2lH57IAQLpf2H8wv.', 'student', 'active'),
 (121, 'SNP1022', '$2y$10$qgE5Hk/NOUs1nK4NZxmb3uZiPYnlKjZB9AsCSoHQTi5VWSXA2lFca', 'student', 'active'),
 (120, 'SNP1021', '$2y$10$5seUxGCHaA9VEFsLu2nd2ejUx7GXoUWFHY6xlEoGcC2V1ameb03nm', 'student', 'active'),
@@ -357,10 +393,7 @@ INSERT INTO `users` (`id`, `username`, `password`, `role`, `status`) VALUES
 (102, 'SNP1003', '$2y$10$Qyj/WA0gKmsPvvBZ6eSlrOlPv/Dhd11ziOcqxtTR4DyQT/HZymGOq', 'student', 'active'),
 (103, 'SNP1004', '$2y$10$RQBKT2MrmdZ09hKIp1rhB.IRxTEj1zDc3kU3mlYo4CQVzRf.9WZg.', 'student', 'active'),
 (104, 'SNP1005', '$2y$10$AtStkbjvpdbiaIff3NlnrOroeSKtQVZ.zbzI/3EoH5SA5qPkY1WJG', 'student', 'active'),
-(84, 'Batman@gmail.com', '$2y$10$u7Jp.8MGNJeIpvOSgrVM9eKO6MkeoAvYp6n23xWT/JRcsfRdZ5HgW', 'teacher', 'active'),
-(86, 'Peterparker@gmail.com', '$2y$10$pXdJDwzfCezTBd5qs08cEeL8bGJKCGGALF4uIoViQWmjlwDJvvJx.', 'teacher', 'active'),
 (106, 'SNP1007', '$2y$10$uTXgzZASkPEG9TwLwUj2wOIT/4Dj1pSO11okSukumTZ2pM02iPiAC', 'student', 'active'),
-(14, '1@gmail.com', '$2y$10$U3qNeYy2yBiROBNEPc7.6exig3BWrqoiJF8Zs2qwAScDnHWVLtILm', 'teacher', 'active'),
 (107, 'SNP1008', '$2y$10$vKBZmnK.uhYbQSb11lYW3OcHv..acifzPQX2s3jNixS1qHaLRUACi', 'student', 'active'),
 (105, 'SNP1006', '$2y$10$P.2d4HlLZobZISshzM1WmePW9GHpliHLusvVIDIj5BjETDr3WvgbW', 'student', 'active'),
 (123, 'SNP1024', '$2y$10$Sji9qwUM6D.RGAholHoSXO5SDlS62CJuv0eO1qEtMowN3p5ANCZ9a', 'student', 'active'),
