@@ -45,13 +45,13 @@ if(isset($_POST['add_teacher'])) {
 
     
     $image_path = NULL;
-    if(isset($_FILES['teacher_image']) && $_FILES['teacher_image']['error'] == 0){
+    if(isset($_FILES['image_path']) && $_FILES['image_path']['error'] == 0){
         $upload_dir = 'uploads/teachers/';
         if(!is_dir($upload_dir)) mkdir($upload_dir, 0777, true);
-        $ext = pathinfo($_FILES['teacher_image']['name'], PATHINFO_EXTENSION);
+        $ext = pathinfo($_FILES['image_path']['name'], PATHINFO_EXTENSION);
         $image_name = uniqid('teacher_').'.'.$ext;
         $target = $upload_dir.$image_name;
-        if(move_uploaded_file($_FILES['teacher_image']['tmp_name'], $target)){
+        if(move_uploaded_file($_FILES['image_path']['tmp_name'], $target)){
             $image_path = $target;
         }
     }
@@ -63,7 +63,7 @@ if(isset($_POST['add_teacher'])) {
         $update_sql = "UPDATE teachers 
                        SET full_name='$full_name', dob='$dob', phone_number='$phone', 
                            qualification='$qualification', date_joined='$date_joined'";
-        if($image_path) $update_sql .= ", teacher_image='$image_path'";
+        if($image_path) $update_sql .= ", image_path='$image_path'";
         $update_sql .= " WHERE email='$email'";
         mysqli_query($conn, $update_sql);
 
@@ -77,7 +77,7 @@ if(isset($_POST['add_teacher'])) {
         $cols = "user_id, full_name, dob, email, phone_number, qualification, date_joined";
         $vals = "$teacher_id, '$full_name', '$dob', '$email', '$phone', '$qualification', '$date_joined'";
         if($image_path){
-            $cols .= ", teacher_image";
+            $cols .= ", image_path";
             $vals .= ", '$image_path'";
         }
         mysqli_query($conn, "INSERT INTO teachers ($cols) VALUES ($vals)");
@@ -119,7 +119,7 @@ if(isset($_POST['upload_file']) && isset($_FILES['teacher_file'])) {
                 $update_sql = "UPDATE teachers 
                                SET full_name='$full_name', dob='$dob', phone_number='$phone', 
                                    qualification='$qualification', date_joined='$date_joined'";
-                if($image_path) $update_sql .= ", teacher_image='$image_path'";
+                if($image_path) $update_sql .= ", image_path='$image_path'";
                 $update_sql .= " WHERE email='$email'";
                 mysqli_query($conn, $update_sql);
 
@@ -133,7 +133,7 @@ if(isset($_POST['upload_file']) && isset($_FILES['teacher_file'])) {
                 $cols = "user_id, full_name, dob, email, phone_number, qualification, date_joined";
                 $vals = "$teacher_id, '$full_name', '$dob', '$email', '$phone', '$qualification', '$date_joined'";
                 if($image_path){
-                    $cols .= ", teacher_image";
+                    $cols .= ", image_path";
                     $vals .= ", '$image_path'";
                 }
                 mysqli_query($conn, "INSERT INTO teachers ($cols) VALUES ($vals)");

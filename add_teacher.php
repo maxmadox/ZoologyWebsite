@@ -78,7 +78,7 @@ include 'header.php';
             <input type="date" name="date_joined" required>
 
             <label>Profile Image:</label>
-            <input type="file" name="teacher_image" accept="image/*">
+            <input type="file" name="image_path" accept="image/*">
 
             <input type="submit" name="add_teacher" value="Add Teacher">
         </form>

@@ -31,14 +31,14 @@ if(isset($_POST['update_teacher'])) {
 
    
     $image_path = NULL;
-    if(isset($_FILES['teacher_image']) && $_FILES['teacher_image']['error'] == 0){
+    if(isset($_FILES['image_path']) && $_FILES['image_path']['error'] == 0){
         $upload_dir = 'uploads/teachers/';
         if(!is_dir($upload_dir)) mkdir($upload_dir, 0777, true);
-        $ext = pathinfo($_FILES['teacher_image']['name'], PATHINFO_EXTENSION);
+        $ext = pathinfo($_FILES['image_path']['name'], PATHINFO_EXTENSION);
         $image_name = uniqid('teacher_').'.'.$ext;
         $target = $upload_dir.$image_name;
 
-        if(move_uploaded_file($_FILES['teacher_image']['tmp_name'], $target)){
+        if(move_uploaded_file($_FILES['image_path']['tmp_name'], $target)){
             $image_path = $target;
         }
     }

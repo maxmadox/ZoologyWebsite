@@ -70,7 +70,7 @@ $other_value = implode(', ', $other_quals);
                     <img src="<?php echo $teacher['image_path']; ?>" alt="Profile" style="width:100px; height:auto; margin-bottom:5px;">
                 </div>
             <?php endif; ?>
-            <input type="file" name="teacher_image" accept="image/*">
+            <input type="file" name="image_path" accept="image/*">
 
             <input type="submit" name="update_teacher" value="Update Teacher">
         </form>
