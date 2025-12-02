@@ -26,7 +26,7 @@ if(!$course) die("Course not found");
     <div class="edit-course-content">
         <h2 class="edit-course-title">Edit Course</h2>
         <div class="edit-course-card">
-            <form method="POST" action="edit_course_process.php?type=<?php echo $type; ?>&id=<?php echo $id; ?>">
+            <form method="POST" action="edit_courses_process.php?type=<?php echo $type; ?>&id=<?php echo $id; ?>">
                 <label for="class">Class</label>
                 <input id="class" name="class" type="text" required value="<?php echo htmlspecialchars($course['class']); ?>">
 

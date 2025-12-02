@@ -36,4 +36,4 @@ $result = mysqli_query($conn, "SELECT * FROM teachers ORDER BY full_name ASC");
     </div>
 </main>
 
-<?php include 'footer.php'; ?>
+<?php include 'footerdisplay.php'; ?>

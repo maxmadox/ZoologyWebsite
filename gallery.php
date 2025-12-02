@@ -60,4 +60,4 @@ while ($row = mysqli_fetch_assoc($result)) {
     </div>
 </main>
 
-<?php include 'footer.php'; ?>
+<?php include 'footerdisplay.php'; ?>

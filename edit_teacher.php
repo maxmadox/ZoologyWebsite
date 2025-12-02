@@ -54,8 +54,9 @@ $other_value = implode(', ', $other_quals);
                     Other
                 </label>
                 <input type="text" id="otherInput" name="other_qualification" placeholder="Specify other qualification"
-                       value="<?php echo $other_value; ?>"
-                       style="margin-left:8px; display:<?php echo $other_checked ? 'inline-block' : 'none'; ?>; width:auto;">
+                value="<?php echo $other_value; ?>"
+                style="display:<?php echo $other_checked ? 'block' : 'none'; ?>;">
+
             </div>
 
             <label>Email:</label>

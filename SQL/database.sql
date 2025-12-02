@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 13, 2025 at 05:36 AM
+-- Generation Time: Dec 02, 2025 at 02:31 PM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `attendance` (
   `status` enum('Present','Absent') NOT NULL DEFAULT 'Present',
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_attendance` (`student_id`,`teacher_id`,`date`)
-) ENGINE=MyISAM AUTO_INCREMENT=135 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=162 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `attendance`
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `bsc_courses` (
   `class` varchar(100) NOT NULL,
   `papers` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `bsc_courses`
@@ -153,7 +153,20 @@ CREATE TABLE IF NOT EXISTS `gallery` (
   `image_path` varchar(255) NOT NULL,
   `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `gallery`
+--
+
+INSERT INTO `gallery` (`id`, `title`, `image_path`, `date`) VALUES
+(14, 'CROCODILE', 'uploads/gallery/1763020337_6260iu42tl821.jpg', '2025-11-13 07:52:17'),
+(15, 'LAB_IMG', 'uploads/gallery/1763020355_z5.jpeg', '2025-11-13 07:52:35'),
+(16, 'SPECIMEN_JAR', 'uploads/gallery/1763020387_specimen-jar.jpg', '2025-11-13 07:53:07'),
+(24, 'snakesnake', 'uploads/gallery/1764684945_snake.jpg', '2025-12-02 14:15:45'),
+(19, 'JAR_2', 'uploads/gallery/1763020539_specimen-jar.jpg', '2025-11-13 07:55:39'),
+(22, 'snake', 'uploads/gallery/1764598268_snake.jpg', '2025-12-01 14:11:08'),
+(23, 'horse', 'uploads/gallery/1764598311_horse.jpg', '2025-12-01 14:11:51');
 
 -- --------------------------------------------------------
 
@@ -215,7 +228,20 @@ CREATE TABLE IF NOT EXISTS `notices` (
   `file_path` varchar(255) NOT NULL,
   `date` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `notices`
+--
+
+INSERT INTO `notices` (`id`, `title`, `file_path`, `date`) VALUES
+(9, 'PG SCHOLARSHIP', 'uploads/notices/1763020766_26.pdf', '2025-11-12 23:59:26'),
+(10, 'kk', 'uploads/notices/1764683357_gecko.jpg', '2025-12-02 19:19:17'),
+(11, 'kk', 'uploads/notices/1764684396_gecko.jpg', '2025-12-02 19:36:36'),
+(12, 'gg', 'uploads/notices/1764684842_gecko.jpg', '2025-12-02 19:44:02'),
+(13, 'll', 'uploads/notices/1764685109_snake.jpg', '2025-12-02 19:48:29'),
+(14, 'kk', 'uploads/notices/1764685401_gecko.jpg', '2025-12-02 19:53:21'),
+(15, 'jj', 'uploads/notices/1764685447_Frog.jpg', '2025-12-02 19:54:07');
 
 -- --------------------------------------------------------
 
@@ -233,7 +259,7 @@ CREATE TABLE IF NOT EXISTS `resources` (
   `date` date NOT NULL,
   `uploaded_by` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `resources`
@@ -243,7 +269,10 @@ INSERT INTO `resources` (`id`, `title`, `type`, `file_path`, `link_url`, `date`,
 (3, 'link', 'link', NULL, 'https://zoologymv.kesug.com/', '2025-10-19', NULL),
 (2, 'file', 'file', 'uploads/resources/1760893269_batman.jpg', NULL, '2025-10-19', NULL),
 (7, 'this is just for test', 'file', 'uploads/resources/1761031697_batman.jpg', NULL, '2025-10-21', NULL),
-(8, 'you you you you you you you you you you you you', 'file', 'uploads/resources/1761032165_batman.jpg', NULL, '2025-10-21', NULL);
+(8, 'you you you you you you you you you you you you', 'file', 'uploads/resources/1761032165_batman.jpg', NULL, '2025-10-21', NULL),
+(11, 'final exam paper', 'link', NULL, 'https://www.youtube.com/watch?v=XfELJU1mRMg', '2025-11-13', NULL),
+(9, 'specimen sample', 'file', 'uploads/resources/1763020879_specimen-jar.jpg', NULL, '2025-11-13', NULL),
+(12, 'gh', 'file', 'uploads/resources/1764684995_snake.jpg', NULL, '2025-12-02', NULL);
 
 -- --------------------------------------------------------
 
@@ -351,6 +380,15 @@ CREATE TABLE IF NOT EXISTS `teachers` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `teachers`
+--
+
+INSERT INTO `teachers` (`user_id`, `full_name`, `dob`, `email`, `phone_number`, `qualification`, `date_joined`, `image_path`) VALUES
+(2, 'Ranjana Sahu', '1980-01-01', 'ranjanasahu@gmail.com', '8269847120', 'M.Sc', '2005-01-01', 'uploads/teachers/teacher_69158c2c82cca.jpg'),
+(3, 'Vinita Pandey', '1980-01-01', 'vinitapandey@gmail.com', '8269847120', 'M.Sc', '2006-01-01', 'uploads/teachers/teacher_69158c7e13e2b.jpg'),
+(4, 'kkkk', '1111-11-11', 'blackcat@gmail.com', '1111111111', '', '1111-11-11', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -393,6 +431,7 @@ INSERT INTO `users` (`id`, `username`, `password`, `role`, `status`) VALUES
 (102, 'SNP1003', '$2y$10$Qyj/WA0gKmsPvvBZ6eSlrOlPv/Dhd11ziOcqxtTR4DyQT/HZymGOq', 'student', 'active'),
 (103, 'SNP1004', '$2y$10$RQBKT2MrmdZ09hKIp1rhB.IRxTEj1zDc3kU3mlYo4CQVzRf.9WZg.', 'student', 'active'),
 (104, 'SNP1005', '$2y$10$AtStkbjvpdbiaIff3NlnrOroeSKtQVZ.zbzI/3EoH5SA5qPkY1WJG', 'student', 'active'),
+(4, 'blackcat@gmail.com', '$2y$10$O5ihN85CnHV1yHt4QhfPSOzT9BXdSv2mGmFH/IBu101z05C4XKr7i', 'teacher', 'active'),
 (106, 'SNP1007', '$2y$10$uTXgzZASkPEG9TwLwUj2wOIT/4Dj1pSO11okSukumTZ2pM02iPiAC', 'student', 'active'),
 (107, 'SNP1008', '$2y$10$vKBZmnK.uhYbQSb11lYW3OcHv..acifzPQX2s3jNixS1qHaLRUACi', 'student', 'active'),
 (105, 'SNP1006', '$2y$10$P.2d4HlLZobZISshzM1WmePW9GHpliHLusvVIDIj5BjETDr3WvgbW', 'student', 'active'),

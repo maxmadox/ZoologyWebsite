@@ -34,4 +34,4 @@ $result = mysqli_query($conn, "SELECT * FROM notices ORDER BY date DESC");
     </div>
 </main>
 
-<?php include 'footer.php'; ?>
+<?php include 'footerdisplay.php'; ?>

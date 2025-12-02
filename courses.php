@@ -75,4 +75,4 @@ include 'header.php';
     </div>
 </main>
 
-<?php include 'footer.php'; ?>
+<?php include 'footerdisplay.php'; ?>

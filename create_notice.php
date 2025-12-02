@@ -1,4 +1,7 @@
+
+
 <?php
+ob_start();
 session_start();
 if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     header('Location: login.php');
@@ -79,3 +82,6 @@ if(isset($_POST['add_notice'])){
 </main>
 
 <?php include 'footer.php'; ?>
+
+<?php ob_end_flush(); ?>
+

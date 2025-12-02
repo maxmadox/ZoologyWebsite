@@ -43,4 +43,4 @@ $result = mysqli_query($conn, "SELECT * FROM resources ORDER BY date DESC");
     </div>
 </main>
 
-<?php include 'footer.php'; ?>
+<?php include 'footerdisplay.php'; ?>
