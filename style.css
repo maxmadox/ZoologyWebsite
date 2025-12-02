@@ -540,7 +540,6 @@
     }
 
     .index-gallery-slide img {
-        user-drag: none;
         -webkit-user-drag: none;
         -webkit-touch-callout: none;
         pointer-events: none;
@@ -775,7 +774,7 @@
     }
 
     .intro-faculty-item {
-        min-width: 370px;    
+        min-width: 350px;    
         width: 100%;
         
         gap: 15px;
@@ -795,6 +794,9 @@
     .intro-faculty-info .qualification,
     .intro-faculty-info .inspiring {
         font-size: 16px;
+    }
+    .intro-faculty-item:hover {
+        transform: none;
     }
 }
 
