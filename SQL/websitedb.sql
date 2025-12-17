@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 02, 2025 at 02:42 PM
+-- Generation Time: Dec 17, 2025 at 02:50 PM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -153,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `gallery` (
   `image_path` varchar(255) NOT NULL,
   `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `gallery`
@@ -162,9 +162,8 @@ CREATE TABLE IF NOT EXISTS `gallery` (
 INSERT INTO `gallery` (`id`, `title`, `image_path`, `date`) VALUES
 (14, 'CROCODILE', 'uploads/gallery/1763020337_6260iu42tl821.jpg', '2025-11-13 07:52:17'),
 (15, 'LAB_IMG', 'uploads/gallery/1763020355_z5.jpeg', '2025-11-13 07:52:35'),
-(16, 'SPECIMEN_JAR', 'uploads/gallery/1763020387_specimen-jar.jpg', '2025-11-13 07:53:07'),
-(24, 'snakesnake', 'uploads/gallery/1764684945_snake.jpg', '2025-12-02 14:15:45'),
-(19, 'JAR_2', 'uploads/gallery/1763020539_specimen-jar.jpg', '2025-11-13 07:55:39'),
+(26, 'harpy', 'uploads/gallery/1765982744_harpy.jpg', '2025-12-17 14:45:44'),
+(25, 'razorbill', 'uploads/gallery/1765982529_razorbill.png', '2025-12-17 14:42:09'),
 (22, 'snake', 'uploads/gallery/1764598268_snake.jpg', '2025-12-01 14:11:08'),
 (23, 'horse', 'uploads/gallery/1764598311_horse.jpg', '2025-12-01 14:11:51');
 
@@ -386,8 +385,7 @@ CREATE TABLE IF NOT EXISTS `teachers` (
 
 INSERT INTO `teachers` (`user_id`, `full_name`, `dob`, `email`, `phone_number`, `qualification`, `date_joined`, `image_path`) VALUES
 (2, 'Ranjana Sahu', '1980-01-01', 'ranjanasahu@gmail.com', '8269847120', 'M.Sc', '2005-01-01', 'uploads/teachers/teacher_69158c2c82cca.jpg'),
-(3, 'Vinita Pandey', '1980-01-01', 'vinitapandey@gmail.com', '8269847120', 'M.Sc', '2006-01-01', 'uploads/teachers/teacher_69158c7e13e2b.jpg'),
-(4, 'kkkk', '1111-11-11', 'blackcat@gmail.com', '1111111111', '', '1111-11-11', NULL);
+(3, 'Vinita Pandey', '1980-01-01', 'vinitapandey@gmail.com', '8269847120', 'M.Sc', '2006-01-01', 'uploads/teachers/teacher_69158c7e13e2b.jpg');
 
 -- --------------------------------------------------------
 
@@ -431,7 +429,6 @@ INSERT INTO `users` (`id`, `username`, `password`, `role`, `status`) VALUES
 (102, 'SNP1003', '$2y$10$Qyj/WA0gKmsPvvBZ6eSlrOlPv/Dhd11ziOcqxtTR4DyQT/HZymGOq', 'student', 'active'),
 (103, 'SNP1004', '$2y$10$RQBKT2MrmdZ09hKIp1rhB.IRxTEj1zDc3kU3mlYo4CQVzRf.9WZg.', 'student', 'active'),
 (104, 'SNP1005', '$2y$10$AtStkbjvpdbiaIff3NlnrOroeSKtQVZ.zbzI/3EoH5SA5qPkY1WJG', 'student', 'active'),
-(4, 'blackcat@gmail.com', '$2y$10$O5ihN85CnHV1yHt4QhfPSOzT9BXdSv2mGmFH/IBu101z05C4XKr7i', 'teacher', 'active'),
 (106, 'SNP1007', '$2y$10$uTXgzZASkPEG9TwLwUj2wOIT/4Dj1pSO11okSukumTZ2pM02iPiAC', 'student', 'active'),
 (107, 'SNP1008', '$2y$10$vKBZmnK.uhYbQSb11lYW3OcHv..acifzPQX2s3jNixS1qHaLRUACi', 'student', 'active'),
 (105, 'SNP1006', '$2y$10$P.2d4HlLZobZISshzM1WmePW9GHpliHLusvVIDIj5BjETDr3WvgbW', 'student', 'active'),

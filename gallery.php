@@ -40,6 +40,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                     <div class="gallery-item horizontal">
                         <img src="<?php echo htmlspecialchars($horizontalImages[$j]['image_path']); ?>" 
                              alt="<?php echo htmlspecialchars($horizontalImages[$j]['title']); ?>">
+                             <div class="gallery-hover-text"><?php echo htmlspecialchars($horizontalImages[$j]['title']); ?></div>
                     </div>
                 <?php endfor; ?>
             </div>
@@ -53,6 +54,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                     <div class="gallery-item vertical">
                         <img src="<?php echo htmlspecialchars($verticalImages[$j]['image_path']); ?>" 
                              alt="<?php echo htmlspecialchars($verticalImages[$j]['title']); ?>">
+                             <div class="gallery-hover-text"><?php echo htmlspecialchars($verticalImages[$j]['title']); ?></div>
                     </div>
                 <?php endfor; ?>
             </div>

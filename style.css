@@ -1423,18 +1423,45 @@
         overflow: hidden;
         flex: 1;
         min-width: 45%;
-        display: flex;
+        display: block;
         justify-content: center;
         align-items: center;
         padding: 10px;
         transition: all 0.3s ease;
         height: 400px;
         box-sizing: border-box;
+        position: relative;
     }
+
+  
+
 
     .gallery-item:hover {
         transform: translateY(-5px);
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .gallery-hover-text {
+        position: absolute;
+        top: 0;              
+        left: 0;              
+        width: 100%;         
+        height: 100%;        
+        display: flex;       
+        justify-content: center;  
+        align-items: center;     
+        background: rgba(0, 0, 0, 0.6); 
+        color: white;
+        font-size: 18px;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 0.4s ease-in-out;
+        pointer-events: none;
+        z-index: 10;
+    }
+
+   .gallery-item:hover .gallery-hover-text {
+        opacity: 1;
     }
 
     .gallery-item img {
