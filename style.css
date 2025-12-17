@@ -774,7 +774,7 @@
     }
 
     .intro-faculty-item {
-        min-width: 350px;   
+        min-width: 300px;   
         flex: 0 0 85vw; 
         width: 100%;
         gap: 15px;
