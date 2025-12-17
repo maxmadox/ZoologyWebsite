@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) { 
+        if (window.scrollY > 5) { 
             paused = true;
             clearAnimationTimeouts();
             snake.style.bottom = '-400px';
@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const intro = document.querySelector('.home-intro');
         if (intro && intro.nextElementSibling) {
             window.scrollTo({
-                top: intro.nextElementSibling.offsetTop,
+                top: intro.nextElementSibling.offsetTop - 70,
                 behavior: 'smooth'
             });
         }

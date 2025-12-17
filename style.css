@@ -430,7 +430,7 @@
     }
 
     .intro-text h1 {
-        font-size: 15px;
+        font-size: 12px;
     }
 
     .intro-text p {
@@ -774,12 +774,12 @@
     }
 
     .intro-faculty-item {
-        min-width: 350px;    
+        min-width: 350px;   
+        flex: 0 0 85vw; 
         width: 100%;
-        
         gap: 15px;
         padding: 15px;
-        scroll-snap-align: start; 
+        scroll-snap-align: start;
     }
 
     .intro-faculty-image {
@@ -1103,9 +1103,12 @@
 
     /* css for faculty*/
     .faculty-container {
-        max-width: 1000px;
-        margin: 0 auto;
+        width: auto;
         padding: 100px 30px 30px 30px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     .faculty-title {
@@ -1114,19 +1117,20 @@
         margin-bottom: 20px;
         font-size: 35px;
         font-weight: bold;
-        color: #023031;
     }
 
     .faculty-list {
         display: flex;
         flex-direction: column;
         gap: 30px;
+        width: 100%;
+        align-items: center;
     }
 
     .faculty-item {
         display: flex;
         align-items: center;
-        width: 100%;
+        width: 106%;
         gap: 30px;
         padding: 25px;
         border-radius: 15px;
@@ -1134,6 +1138,7 @@
         color: white;
         box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         transition: all 0.3s ease;
+        box-sizing: border-box;
     }
     
     .faculty-item:hover {
@@ -1192,22 +1197,9 @@
 
 
 @media (max-width: 768px) {
-
-    .faculty-container {
-        padding: 80px 15px 30px 15px;
-    }
-
     .faculty-title {
         font-size: 30px;
-        
     }
-
-    .faculty-item {
-        gap: 15px;
-        padding: 15px;
-        width: 90%;
-    }
-
    
     .faculty-image {
         width: 150px;
@@ -1535,7 +1527,7 @@
 
 
 
-    /* CSS for about.php */
+
 /* CSS for about.php */
 .about-view {
     width: 100%;
@@ -1602,7 +1594,7 @@
     }
 
     .about-text h1 {
-        font-size: 15px;
+        font-size: 12px;
     }
 
     .about-text p {
@@ -1695,7 +1687,7 @@
     }
 
     .contact-text h1 {
-        font-size: 15px;
+        font-size: 12px;
     }
 
     .contact-text p {

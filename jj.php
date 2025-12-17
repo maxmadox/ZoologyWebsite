@@ -1,31 +1,29 @@
-<svg viewBox="0 0 80 180" xmlns="http://www.w3.org/2000/svg">
 
+<svg viewBox="0 0 80 180" width="auto" height="auto" xmlns="http://www.w3.org/2000/svg">
     <defs>
-        <linearGradient id="tailGradient" x1="0%" y1="0%" x2="100%" y2="0%" gradientunits="userSpaceOnUse">
+        <linearGradient id="linearGradient" x1="0%" y1="0%" x2="100%" y2="0%" gradientunits="userSpaceOnUse">
             <stop offset="0%" stop-color="#002627ff"/>
             <stop offset="50%" stop-color="#023031"/>
             <stop offset="100%" stop-color="#94d4bdff"/>
         </linearGradient>
 
         <linearGradient id="rattleGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#00A86B"/>
-            <stop offset="100%" stop-color="#00f098ff"/>
+            <stop offset="0%" stop-color="#023031"/>
+            <stop offset="100%" stop-color="#00A86B"/>
         </linearGradient>
     </defs>
-
-
-
+  <!-- Tail + rattles as a single unit -->
   <g id="snake-tail" transform="translate(0,0)">
+    <!-- Tail segments -->
+    <line class="seg" x1="40" y1="50" x2="40" y2="65" stroke="url(#linearGradient)" stroke-width="11" stroke-linecap="round"/>
+    <line class="seg" x1="40" y1="65" x2="41" y2="80" stroke="url(#linearGradient)" stroke-width="12" stroke-linecap="round"/>
+    <line class="seg" x1="41" y1="80" x2="41" y2="95" stroke="url(#linearGradient)" stroke-width="13" stroke-linecap="round"/>
+    <line class="seg" x1="41" y1="95" x2="40.5" y2="110" stroke="url(#linearGradient)" stroke-width="14" stroke-linecap="round"/>
+    <line class="seg" x1="40.5" y1="110" x2="41" y2="125" stroke="url(#linearGradient)" stroke-width="15" stroke-linecap="round"/>
+    <line class="seg" x1="41" y1="125" x2="40" y2="140" stroke="url(#linearGradient)" stroke-width="16" stroke-linecap="round"/>
+    <line class="seg" x1="40" y1="140" x2="40" y2="155" stroke="url(#linearGradient)" stroke-width="17" stroke-linecap="round"/>
 
-    <line class="seg" x1="40" y1="50" x2="40" y2="65" stroke="url(#tailGradient)" stroke-width="11" stroke-linecap="round"/>
-    <line class="seg" x1="40" y1="65" x2="41" y2="80" stroke="url(#tailGradient)" stroke-width="12" stroke-linecap="round"/>
-    <line class="seg" x1="41" y1="80" x2="41" y2="95" stroke="url(#tailGradient)" stroke-width="13" stroke-linecap="round"/>
-    <line class="seg" x1="41" y1="95" x2="40.5" y2="110" stroke="url(#tailGradient)" stroke-width="14" stroke-linecap="round"/>
-    <line class="seg" x1="40.5" y1="110" x2="41" y2="125" stroke="url(#tailGradient)" stroke-width="15" stroke-linecap="round"/>
-    <line class="seg" x1="41" y1="125" x2="40" y2="140" stroke="url(#tailGradient)" stroke-width="16" stroke-linecap="round"/>
-    <line class="seg" x1="40" y1="140" x2="40" y2="155" stroke="url(#tailGradient)" stroke-width="17" stroke-linecap="round"/>
-
-
+    <!-- Rattles -->
     <g id="rattles" transform="translate(0,0)">
       <rect x="34" y="44" width="6" height="6" fill="url(#rattleGradient)" rx="1"/>
       <rect x="40" y="44" width="6" height="6" fill="url(#rattleGradient)" rx="1"/>
@@ -41,7 +39,7 @@
       <rect x="40" y="25" width="3.5" height="4" fill="url(#rattleGradient)" rx="1"/>
       <rect x="37" y="21.4" width="3" height="4" fill="url(#rattleGradient)" rx="1"/>
       <rect x="40" y="21.4" width="3" height="4" fill="url(#rattleGradient)" rx="1"/>
-      <rect x="37.5" y="19" width="2.5" height="3.5" fill="url(#rattleGradient)" rx="1"/>
+      <rect x="37.5" y="19" width="2.5" height="3.5" fill="url(#rattleGradient)" rx="1"/>        
       <rect x="40" y="19" width="2.5" height="3.5" fill="url(#rattleGradient)" rx="1"/>
       <rect x="38" y="16.5" width="2" height="3" fill="url(#rattleGradient)" rx="1"/>
       <rect x="40" y="16.5" width="2" height="3" fill="url(#rattleGradient)" rx="1"/>
